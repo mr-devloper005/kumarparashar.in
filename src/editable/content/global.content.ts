@@ -3,52 +3,50 @@ import { slot4BrandConfig } from '@/editable/theme/brand.config'
 export const globalContent = {
   site: {
     name: slot4BrandConfig.siteName,
-    tagline: slot4BrandConfig.tagline || 'Independent reading platform',
+    tagline: slot4BrandConfig.tagline || 'A working reference library',
     domain: slot4BrandConfig.domain,
     baseUrl: slot4BrandConfig.baseUrl,
   },
   nav: {
-    tagline: 'Independent reading platform',
+    tagline: 'A reference library',
     primaryLinks: [
-      { label: 'Articles', href: '/articles' },
-      { label: 'Visuals', href: '/image-sharing' },
-      { label: 'Listings', href: '/listings' },
+      { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ],
     actions: {
-      primary: { label: 'Start exploring', href: '/' },
-      secondary: { label: 'Submit', href: '/contact' },
+      primary: { label: 'Get started', href: '/signup' },
+      secondary: { label: 'Contact', href: '/contact' },
     },
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
-    description: 'A connected publishing surface for articles, visuals, listings, profiles, bookmarks, and downloadable resources.',
+    tagline: 'Contribute to the library',
+    description:
+      'A working reference library — downloadable documents and the long-form writing that gives them context. One quiet surface for reading, browsing, and keeping what matters.',
     columns: [
       {
-        title: 'Explore',
+        title: 'Discovery',
         links: [
-          { label: 'Articles', href: '/articles' },
-          { label: 'Listings', href: '/listings' },
-          { label: 'Images', href: '/image-sharing' },
-          { label: 'PDF Library', href: '/pdf' },
+          { label: 'The Reference Library', href: '/pdf' },
+          { label: 'The Journal', href: '/article' },
+          { label: 'Search', href: '/search' },
         ],
       },
       {
-        title: 'Site',
+        title: 'Studio',
         links: [
           { label: 'About', href: '/about' },
           { label: 'Contact', href: '/contact' },
         ],
       },
     ],
-    bottomNote: 'Built for clean discovery and connected publishing.',
+    bottomNote: 'Made with care',
   },
   commonLabels: {
-    readMore: 'Read more',
+    readMore: 'Read on',
     viewAll: 'View all',
-    explore: 'Explore',
-    latest: 'Latest',
-    related: 'Related',
-    published: 'Published',
+    explore: 'Enter',
+    latest: 'Fresh',
+    related: 'More like this',
+    published: 'On the shelf',
   },
 } as const
