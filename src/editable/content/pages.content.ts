@@ -1,159 +1,179 @@
 import { slot4BrandConfig } from '@/editable/theme/brand.config'
 
+const brand = slot4BrandConfig.siteName
+
+/*
+  The public surface centers on the Reference Library — a working shelf of
+  documents, collections, and resources. Long-form pieces live in The Journal.
+  Profile-facing copy is deliberately absent from every public page.
+*/
+
 export const pagesContent = {
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
-      description: 'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
-      openGraphDescription: 'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+      title: `${brand} — The Reference Library`,
+      description:
+        'A working library of documents, guides, and reference material — with The Journal for long-form context. Search, browse, and download.',
+      openGraphTitle: `${brand} — The Reference Library`,
+      openGraphDescription:
+        'Reference documents, collections, and long-form context — one calm, working library.',
+      keywords: ['reference library', 'document archive', 'research documents', 'guide library'],
     },
     hero: {
-      badge: 'Latest stories and visuals',
-      title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
-      description: 'Explore fresh articles, image-led posts, and discoverable content across the platform through a calmer and clearer browsing experience.',
-      primaryCta: { label: 'Read latest stories', href: '/article' },
-      secondaryCta: { label: 'Explore visuals', href: '/image' },
-      searchPlaceholder: 'Search stories, visuals, listings, and more',
+      badge: 'The Reference Library',
+      title: ['Read.', 'Reference.', 'Download.'],
+      description:
+        `${brand} is a working reference library — documents, guides, and collections you can actually keep, with long-form pieces in The Journal for the context around them.`,
+      primaryCta: { label: 'Open the Library', href: '/pdf' },
+      secondaryCta: { label: 'Read The Journal', href: '/article' },
+      searchPlaceholder: 'Search documents and guides',
       focusLabel: 'Focus',
-      featureCardBadge: 'latest cover rotation',
-      featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
-      featureCardDescription: 'Recent images and stories stay at the center of the experience without changing any core platform behavior.',
+      featureCardBadge: 'On the shelf',
+      featureCardTitle: 'The latest document on the shelf.',
+      featureCardDescription:
+        'The freshest addition leads every visit — every collection radiates out from here.',
     },
     intro: {
-      badge: 'About the platform',
-      title: 'Built for reading, browsing, and connecting different kinds of content.',
+      badge: 'About the library',
+      title: 'A working shelf for documents, guides, and the writing around them.',
       paragraphs: [
-        'This site brings together article-style reading, visual browsing, and structured discovery so visitors can move naturally between different content types.',
-        'Instead of separating stories, visuals, and supporting resources into disconnected surfaces, the platform keeps them connected in one place with consistent navigation and easier exploration.',
-        'Whether someone starts with a story, an image-led post, a listing, or a resource page, they can keep discovering related content without friction.',
+        'The library keeps two rooms open at once — the Reference Library for downloadable documents and collections, and The Journal for long-form pieces that give them context.',
+        'Both rooms speak the same language: quiet type, generous space, one accent. Every file is downloadable, previewable, and reachable in two clicks.',
+        'Whether you start with a document, a guide, or a piece of writing, the trail carries you forward. Nothing gets buried; nothing shouts.',
       ],
       sideBadge: 'At a glance',
       sidePoints: [
-        'Reading-first homepage with stronger emphasis on stories and imagery.',
-        'Connected sections for articles, visuals, listings, and supporting resources.',
-        'Cleaner browsing rhythm designed to make exploration feel easier.',
-        'Lightweight interactions that keep the experience fast and readable.',
+        'A working shelf of PDFs, guides, and reference documents.',
+        'Every entry previewable in-browser, downloadable in one click.',
+        'The Journal for long-form context around every document.',
+        'One accent, one type family, one calm rhythm across the site.',
       ],
-      primaryLink: { label: 'Browse articles', href: '/article' },
-      secondaryLink: { label: 'See visuals', href: '/image' },
+      primaryLink: { label: 'Open the Library', href: '/pdf' },
+      secondaryLink: { label: 'Read The Journal', href: '/article' },
     },
     cta: {
-      badge: 'Start exploring',
-      title: 'Explore articles, visuals, and resources through one connected experience.',
-      description: 'Move between articles, image-led posts, listings, and resources through one clearer and more connected visual system.',
-      primaryCta: { label: 'Browse Articles', href: '/article' },
-      secondaryCta: { label: 'Contact Sales', href: '/contact' },
+      badge: 'Contribute to the library',
+      title: 'Send a document to the shelf.',
+      description:
+        'Have a guide, a report, or a document worth keeping? Submit it to the Reference Library — the shelf restocks weekly.',
+      primaryCta: { label: 'Get started', href: '/signup' },
+      secondaryCta: { label: 'Get in touch', href: '/contact' },
     },
     taskSection: {
-      heading: 'Latest {label}',
-      descriptionSuffix: 'Browse the newest posts in this section.',
+      heading: 'Fresh in {label}',
+      descriptionSuffix: 'Newest additions from this room of the library.',
     },
   },
   about: {
-    badge: 'Our Story',
-    title: 'A calmer, clearer way to explore content.',
-    description: `${slot4BrandConfig.siteName} is built to make long-form reading, visual discovery, and supporting resources feel like one unified experience.`,
+    badge: 'The library',
+    title: 'A quieter way to keep documents, guides, and the writing around them.',
+    description: `${brand} is a working library — the Reference Library for downloadable documents, The Journal for the writing around them, and one voice tying it all together.`,
     paragraphs: [
-      'Instead of splitting everything into disconnected pages, the platform keeps related content easy to move through and easy to understand.',
-      'Whether someone starts with an article, listing, image post, or resource page, they can continue exploring without losing context.',
+      'The site is deliberately narrow: a shelf for documents you can actually keep, and a journal for the pieces that give each one context.',
+      'Nothing fights for your attention. The type is one family, the accent is one color, and every room reads on the same rhythm — so nothing feels like a different product bolted on.',
+      'Whether you land on a document, a collection, or an essay, the trail leads back to the library. Move between rooms without switching gears.',
     ],
     values: [
       {
-        title: 'Reading-first experience',
-        description: 'We prioritize clarity, pacing, and structure so people can read, browse, and discover without noise.',
+        title: 'The shelf first',
+        description:
+          'The Reference Library sets the pace: previewable documents, one-click downloads, clean file cards. Every entry gets room.',
       },
       {
-        title: 'Connected content surfaces',
-        description: 'Articles, visual posts, listings, resources, and profiles stay connected so discovery feels natural across the site.',
+        title: 'The Journal, in context',
+        description:
+          'Long-form pieces give the documents the writing they deserve. Read a piece, download the reference, keep both.',
       },
       {
-        title: 'Simple and trustworthy',
-        description: 'We focus on clean navigation and clear page structure to help visitors find useful content faster.',
+        title: 'One voice, everywhere',
+        description:
+          'Type, spacing, accent, and motion stay the same across rooms. The library feels like a place, not a portfolio of pages.',
       },
     ],
   },
   contact: {
-    eyebrow: `Contact ${slot4BrandConfig.siteName}`,
-    title: 'A support page that matches the product, not a generic contact form.',
-    description: 'Tell us what you are trying to publish, fix, or launch. We will route it through the right lane instead of forcing every request into the same support bucket.',
-    formTitle: 'Send a message',
+    eyebrow: `Reach ${brand}`,
+    title: 'Contact the desk directly — not a support queue.',
+    description:
+      'Send a document for the Reference Library, pitch a piece for The Journal, or ask about a collection. Every message reaches the desk.',
+    formTitle: 'Send a note',
   },
 
   search: {
     metadata: {
-      title: 'Search',
-      description: 'Search posts, topics, categories, and content across the site.',
+      title: 'Search the library',
+      description: 'Search the Reference Library and The Journal across the whole site.',
     },
     hero: {
-      badge: 'Search the archive',
-      title: 'Find stories, listings, visuals, and resources faster.',
-      description: 'Use keywords, categories, and content types to discover posts from every active section of the site.',
-      placeholder: 'Search by keyword, topic, category, or title',
+      badge: 'Across the library',
+      title: 'Search every room at once.',
+      description:
+        'Keywords, categories, and rooms — every document and piece across the library in a single search.',
+      placeholder: 'Search documents, guides, and pieces',
     },
-    resultsTitle: 'Latest searchable content',
+    resultsTitle: 'Recently on the shelf',
   },
   create: {
     metadata: {
-      title: 'Create',
-      description: 'Create and submit new content for the site.',
+      title: 'Submit',
+      description: 'Submit a new document, guide, or piece.',
     },
     locked: {
-      badge: 'Creator access',
-      title: 'Login to create new content.',
-      description: 'Use your account to open the publishing workspace and create posts for the active sections of this site.',
+      badge: 'Contributor access',
+      title: 'Sign in to submit to the library.',
+      description: 'The submission workspace is open to members of the desk. Sign in to continue.',
     },
     hero: {
-      badge: 'Publishing workspace',
-      title: 'Create content for every active section.',
-      description: 'Choose the content type, add details, and prepare a clean post with images, links, summary, and body content.',
+      badge: 'Submission workspace',
+      title: 'Send an entry to the library.',
+      description:
+        'Pick a room, add the details, and prepare a clean entry with a file, cover image, summary, and body.',
     },
-    formTitle: 'Content details',
-    submitLabel: 'Submit content',
-    successTitle: 'Content submitted successfully.',
+    formTitle: 'Entry details',
+    submitLabel: 'Submit entry',
+    successTitle: 'Entry submitted.',
   },
   auth: {
     login: {
-      metadataDescription: 'Login page for this site.',
+      metadataDescription: 'Sign in to the desk.',
       badge: 'Member access',
-      title: 'Welcome back to your publishing space.',
-      description: 'Login to continue browsing, managing submissions, and creating new content from your account.',
-      formTitle: 'Login',
+      title: 'Welcome back to the desk.',
+      description: 'Sign in to manage your entries, submissions, and shelf contributions.',
+      formTitle: 'Sign in',
       submitLabel: 'Continue',
-      noAccount: 'No account matched these details. Create an account first, then login.',
-      success: 'Login successful. Redirecting...',
+      noAccount: 'No account matched. Create an account first, then sign in.',
+      success: 'Signed in. Redirecting…',
       createCta: 'Create an account',
     },
     signup: {
-      metadataDescription: 'Signup page for this site.',
-      badge: 'Site access',
-      title: 'Create your account and start publishing.',
-      description: 'Create an account to access the publishing workspace, save details, and submit content through the site.',
+      metadataDescription: 'Create an account with the desk.',
+      badge: 'Contributor access',
+      title: 'Join the desk.',
+      description: 'Create an account to submit documents, guides, and pieces to the library.',
       formTitle: 'Create account',
       submitLabel: 'Create account',
       passwordShort: 'Use at least 4 characters for the password.',
-      success: 'Account created successfully. Redirecting...',
-      loginCta: 'Login',
+      success: 'Account created. Redirecting…',
+      loginCta: 'Sign in',
     },
   },
   detailPages: {
     article: {
-      relatedTitle: 'Related articles',
-      fallbackTitle: 'Article details',
+      relatedTitle: 'More from The Journal',
+      fallbackTitle: 'Entry details',
     },
     listing: {
-      relatedTitle: 'Related listings',
-      fallbackTitle: 'Listing details',
+      relatedTitle: 'More studios',
+      fallbackTitle: 'Studio details',
     },
     image: {
-      relatedTitle: 'Related visuals',
-      fallbackTitle: 'Image details',
+      relatedTitle: 'More visuals',
+      fallbackTitle: 'Visual details',
     },
     profile: {
-      relatedTitle: 'Suggested articles',
-      fallbackDescription: 'Profile details will appear here once available.',
-      visitButton: 'Visit Official Site',
+      relatedTitle: 'From the Reference Library',
+      fallbackDescription: 'Entry details will appear here once available.',
+      visitButton: 'Visit official site',
     },
   },
 } as const
