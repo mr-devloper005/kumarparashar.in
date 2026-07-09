@@ -29,8 +29,6 @@ export function EditableArticleComments({ slug, comments = [] }: { slug: string;
   const [name, setName] = useState('')
   const [text, setText] = useState('')
 
-  // Load this article's comments after mount (initial render stays in sync with
-  // the server so there's no hydration mismatch).
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(storageKey(slug))
@@ -63,59 +61,73 @@ export function EditableArticleComments({ slug, comments = [] }: { slug: string;
     setText('')
   }
 
-  // User comments (newest first) sit above any existing comments.
   const all = useMemo(() => [...stored, ...comments], [stored, comments])
 
   return (
-    <section className="mt-14 border-t border-[var(--tk-line)] pt-10">
-      <div className="flex items-center gap-2 text-lg font-semibold">
-        <MessageCircle className="h-5 w-5 text-[var(--tk-accent)]" /> Comments
-        <span className="text-[var(--tk-muted)]">({all.length})</span>
+    <section className="mt-20 border-t border-[var(--tk-line)] pt-14">
+      <div className="flex items-center gap-3 editable-mono text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--tk-accent)]">
+        <MessageCircle className="h-4 w-4" /> Notes ({String(all.length).padStart(2, '0')})
       </div>
 
-      <form onSubmit={submit} className="mt-6 rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-5">
+      <form
+        onSubmit={submit}
+        className="mt-8 rounded-[18px] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6"
+      >
         <input
           value={name}
           onChange={(event) => setName(event.target.value)}
           placeholder="Your name (optional)"
           maxLength={60}
-          className="h-11 w-full rounded-lg border border-[var(--tk-line)] bg-[var(--tk-bg)] px-4 text-sm text-[var(--tk-text)] outline-none transition focus:border-[var(--tk-accent)]"
+          className="h-11 w-full rounded-full border border-[var(--tk-line)] bg-[var(--tk-bg)] px-5 text-[14px] font-medium text-[var(--tk-text)] outline-none transition duration-500 focus:border-[var(--tk-accent)]"
         />
         <textarea
           value={text}
           onChange={(event) => setText(event.target.value)}
-          placeholder="Share your thoughts…"
+          placeholder="Add a note to the piece…"
           rows={3}
           maxLength={1500}
-          className="mt-3 w-full resize-y rounded-lg border border-[var(--tk-line)] bg-[var(--tk-bg)] px-4 py-3 text-sm leading-6 text-[var(--tk-text)] outline-none transition focus:border-[var(--tk-accent)]"
+          className="mt-3 w-full resize-y rounded-[18px] border border-[var(--tk-line)] bg-[var(--tk-bg)] px-5 py-4 text-[14px] leading-6 text-[var(--tk-text)] outline-none transition duration-500 focus:border-[var(--tk-accent)]"
         />
-        <div className="mt-3 flex justify-end">
+        <div className="mt-4 flex justify-end">
           <button
             type="submit"
             disabled={!text.trim()}
-            className="inline-flex items-center gap-2 rounded-lg bg-[var(--tk-accent)] px-6 py-2.5 text-sm font-bold text-[var(--tk-on-accent)] transition hover:brightness-95 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--tk-accent)] px-6 py-3 text-[13px] font-semibold text-[var(--tk-on-accent)] transition duration-500 hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <Send className="h-4 w-4" /> Post comment
+            <Send className="h-4 w-4" /> Post note
           </button>
         </div>
       </form>
 
-      <div className="mt-6 grid gap-3">
+      <div className="mt-8 grid gap-4">
         {all.map((comment) => (
-          <div key={comment.id} className="rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-5">
+          <div
+            key={comment.id}
+            className="rounded-[18px] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-6"
+          >
             <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--tk-accent-soft)] text-sm font-bold text-[var(--tk-accent)]">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--tk-accent-soft)] editable-display text-[14px] font-medium text-[var(--tk-accent)]">
                 {initial(comment.name)}
               </span>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-[var(--tk-text)]">{comment.name || 'Guest'}</p>
-                {comment.createdAt ? <p className="text-xs text-[var(--tk-muted)]">{timeAgo(comment.createdAt)}</p> : null}
+                <p className="editable-display truncate text-[14px] font-medium text-[var(--tk-text)]">
+                  {comment.name || 'Guest'}
+                </p>
+                {comment.createdAt ? (
+                  <p className="editable-mono text-[11px] uppercase tracking-[0.18em] text-[var(--tk-muted)]">
+                    {timeAgo(comment.createdAt)}
+                  </p>
+                ) : null}
               </div>
             </div>
-            <p className="mt-3 whitespace-pre-line text-sm leading-6 text-[var(--tk-text)]">{comment.comment}</p>
+            <p className="mt-4 whitespace-pre-line text-[14px] leading-[1.7] text-[var(--tk-text)]">
+              {comment.comment}
+            </p>
           </div>
         ))}
-        {!all.length ? <p className="text-sm text-[var(--tk-muted)]">Be the first to comment.</p> : null}
+        {!all.length ? (
+          <p className="text-[13px] text-[var(--tk-muted)]">Be the first to leave a note.</p>
+        ) : null}
       </div>
     </section>
   )
