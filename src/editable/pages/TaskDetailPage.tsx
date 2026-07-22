@@ -16,7 +16,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  Quote,
   Share2,
   ShieldCheck,
   Sparkles,
@@ -59,10 +58,9 @@ export async function EditableTaskDetailRoute({
   const slug = resolved.slug || resolved.username || ''
   const post = await fetchTaskPostBySlug(task, slug)
   if (!post) notFound()
-  // Related pool: profile detail pulls from the public library (pdf) — never
-  // more profile entries, since profile is hidden from public UI. Every other
-  // task keeps its own-room related strip.
-  const relatedTask: TaskKey = task === 'profile' ? 'pdf' : task
+  // Related pool: every task, including profile, shows related entries from
+  // its own room so the detail page surfaces genuinely related posts.
+  const relatedTask: TaskKey = task
   const relatedPool = await fetchTaskPosts(relatedTask, 7)
   const related = relatedPool.filter((item) => item.slug !== post.slug).slice(0, 4)
   const comments = task === 'article' ? await fetchArticleComments(post.slug, 50) : []
@@ -103,7 +101,8 @@ const getImages = (post: SitePost) => {
   const singleImages = ['image', 'featuredImage', 'thumbnail', 'logo', 'avatar', 'cover']
     .map((key) => asText(content[key]))
     .filter((url) => url && isUrl(url))
-  return [...media, ...images, ...singleImages].filter(Boolean).slice(0, 16)
+  const deduped = Array.from(new Set([...media, ...images, ...singleImages].filter(Boolean)))
+  return deduped.slice(0, 16)
 }
 
 const getBody = (post: SitePost) => {
@@ -441,7 +440,6 @@ function ProfileDetail({ post, related, relatedTask }: { post: SitePost; related
   const phone = getField(post, ['phone', 'telephone', 'mobile'])
   const mapSrc = mapSrcFor(post)
   const tagList = Array.isArray(post.tags) ? post.tags.slice(0, 8) : []
-  const bio = leadText(post) || firstParagraph(post, 42)
   const initials = post.title
     .split(/\s+/)
     .slice(0, 2)
@@ -545,19 +543,6 @@ function ProfileDetail({ post, related, relatedTask }: { post: SitePost; related
       <section className="mx-auto max-w-[var(--editable-container)] px-6 py-24 sm:px-10 lg:px-14 lg:py-32">
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_380px]">
           <article className="min-w-0">
-            {bio ? (
-              <EditableReveal>
-                <div className="relative">
-                  <Quote className="absolute -left-2 -top-4 h-10 w-10 text-[var(--tk-accent)] opacity-40" />
-                  <p className="editable-display max-w-3xl pl-8 text-[26px] font-medium leading-[1.35] tracking-[-0.02em] text-[var(--tk-text)] sm:text-[36px]">
-                    “{bio}”
-                  </p>
-                </div>
-              </EditableReveal>
-            ) : null}
-
-            <Divider />
-
             <EditableReveal>
               <p className="editable-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--tk-accent)]">
                 Full note
@@ -800,7 +785,6 @@ function ArticleDetail({
   const rtime = readingTime(post)
   const words = wordCount(post)
   const outline = extractOutline(post)
-  const lead = leadText(post) || firstParagraph(post, 34)
   const author = post.authorName || SITE_CONFIG.name
   const tagList = Array.isArray(post.tags) ? post.tags.slice(0, 8) : []
 
@@ -875,15 +859,6 @@ function ArticleDetail({
               </div>
             </EditableReveal>
           </div>
-
-          {/* Standfirst — pulls into a full-width lead paragraph */}
-          {lead ? (
-            <EditableReveal index={2} className="mt-20 border-t border-[var(--tk-line)] pt-16">
-              <p className="mx-auto max-w-4xl text-balance text-center editable-display text-[24px] font-medium leading-[1.35] tracking-[-0.02em] text-[var(--tk-text)] sm:text-[34px]">
-                {lead}
-              </p>
-            </EditableReveal>
-          ) : null}
         </div>
       </section>
 
@@ -901,19 +876,6 @@ function ArticleDetail({
             </div>
 
             <BodyContent post={post} />
-
-            {/* Highlighted pull-quote mid-body (uses lead) */}
-            {lead ? (
-              <div className="mt-16 rounded-[24px] border border-[var(--tk-line)] bg-[var(--tk-surface)] p-10">
-                <Quote className="h-8 w-8 text-[var(--tk-accent)]" />
-                <p className="editable-display mt-6 text-[24px] font-medium leading-[1.3] tracking-[-0.02em] text-[var(--tk-text)] sm:text-[32px]">
-                  {lead}
-                </p>
-                <p className="mt-6 editable-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--tk-muted)]">
-                  — {author}
-                </p>
-              </div>
-            ) : null}
 
             {/* Optional secondary image mid-piece */}
             {secondary ? (
