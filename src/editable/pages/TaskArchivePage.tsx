@@ -28,6 +28,9 @@ const getContent = (post: SitePost) =>
 const asText = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
 const isUrl = (value: string) => value.startsWith('/') || /^https?:\/\//i.test(value)
 
+const dedupeUrls = (urls: Array<string | null | undefined>): string[] =>
+  Array.from(new Set(urls.map((url) => (typeof url === 'string' ? url.trim() : '')).filter((url) => url.length > 0)))
+
 const getImages = (post: SitePost) => {
   const content = getContent(post)
   const media = Array.isArray(post.media)
@@ -38,7 +41,7 @@ const getImages = (post: SitePost) => {
     : []
   const image = asText(content.image) || asText(content.featuredImage) || asText(content.thumbnail)
   const logo = asText(content.logo)
-  return [...media, ...images, ...(isUrl(image) ? [image] : []), ...(isUrl(logo) ? [logo] : [])].filter(Boolean).slice(0, 8)
+  return dedupeUrls([...media, ...images, ...(isUrl(image) ? [image] : []), ...(isUrl(logo) ? [logo] : [])]).filter(Boolean).slice(0, 8)
 }
 
 const placeholder = '/placeholder.svg?height=900&width=1200'
